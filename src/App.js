@@ -71,3 +71,8 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+// load the request so that I get 100 quotes, then store this in an array, so that hitting the button doesn't consume an API call which is expensive. 
+// A reload should trigger this request, so do the call in componentDidMount, then once again for each component update. 
+//component should be updated by the change in bgColor, a prop of the App component. 
