@@ -6,6 +6,20 @@
   flex-direction: column;
   align-items: center;
   background-color:'#006B76';
+  justify-content: space-around;
 
+}
 
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  flex-wrap: wrap
+
+}
+
+.buttonQuote {
+  display: flex;
+  
 }
