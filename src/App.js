@@ -9,7 +9,8 @@ class App extends React.Component {
     this.state = {
       colors: ['#194D33', '#006B76', '#FCCB00', '#D0021B'],
       bgColor: '#194D33',
-      pageQuote: ''
+      pageQuote: '',
+      quoter: ''
     }
     this.changeBgColor = this.changeBgColor.bind(this);
   };
@@ -18,28 +19,35 @@ class App extends React.Component {
     axios.get('https://www.breakingbadapi.com/api/quote/random')
     .then(response => {
       let getQuote = response.data[0].quote;
-      console.log(getQuote);
+      let getQuoter = response.data[0].author;
+      getQuoter = "- " + getQuoter;
+
       this.setState(() => ({pageQuote: getQuote}));
+      this.setState(() => ({quoter: getQuoter}));
     })
     .catch(error => {
       console.log(error)
     })
 
   }
-  componentDidUpdate(prevProps) {
-    if (this.props.bgColor !== prevProps.bgColor) {
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.bgColor !== prevState.bgColor) {
 
       axios.get('https://www.breakingbadapi.com/api/quote/random')
       .then(response => {
         let getQuote = response.data[0].quote;
-        console.log(getQuote);
-        this.setState(() => ({pageQuote: getQuote}));
+        let getQuoter = response.data[0].author;
+        getQuoter = "- " + getQuoter;
+
+        console.log(getQuoter);
+        this.setState(() => ({pageQuote: getQuote, quoter: getQuoter}));
       })
       .catch(error => {
         console.log(error)
       })
 
-    }
+     }
   }
 
   changeBgColor() {
@@ -59,11 +67,29 @@ class App extends React.Component {
 
     return (
       <div className = "backdrop"
-        style = {{backgroundColor: this.state.bgColor}}
+        style = {{
+          backgroundColor: this.state.bgColor
+        }}
+
       >
-        <h1>Hello World</h1>
-        <button onClick = {this.changeBgColor}>change color!</button>
-        <p>{this.state.pageQuote}</p>
+
+        {/* for the whole card with quote, button, and quoter*/}
+        <div className = "card">
+
+          {/* for just the quote styling */}
+          <div className = "quote">
+            <h1 style = {{color: this.state.bgColor}}>{this.state.pageQuote}</h1>
+          </div>        
+
+          {/* holds the button and quote elements */}
+          <div className = "buttonQuote">
+            <p style = {{color: this.state.bgColor}}>{this.state.quoter}</p>
+
+            <button style = {{color: "white", border: "none", outline: 0, backgroundColor: this.state.bgColor, padding: '10px'}}
+            onClick = {this.changeBgColor}>New Quote</button>
+          </div>
+        </div>
+
       </div>
     );
   }
