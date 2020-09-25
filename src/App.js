@@ -69,19 +69,25 @@ class App extends React.Component {
       <div className = "backdrop"
         style = {{
           backgroundColor: this.state.bgColor
-          
-        
         }}
 
       >
 
+        {/* for the whole card with quote, button, and quoter*/}
         <div className = "card">
-          <h1 style = {{color: this.state.bgColor}}>{this.state.pageQuote}</h1>
 
-            <div className = "buttonQuote">
-              <button onClick = {this.changeBgColor}>New Quote</button>
-              <p style = {{color: this.state.bgColor}}>{this.state.quoter}</p>
-            </div>
+          {/* for just the quote styling */}
+          <div className = "quote">
+            <h1 style = {{color: this.state.bgColor}}>{this.state.pageQuote}</h1>
+          </div>        
+
+          {/* holds the button and quote elements */}
+          <div className = "buttonQuote">
+            <p style = {{color: this.state.bgColor}}>{this.state.quoter}</p>
+
+            <button style = {{color: "white", border: "none", outline: 0, backgroundColor: this.state.bgColor, padding: '10px'}}
+            onClick = {this.changeBgColor}>New Quote</button>
+          </div>
         </div>
 
       </div>
