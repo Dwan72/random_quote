@@ -30,26 +30,25 @@ class App extends React.Component {
     })
 
   }
-  // componentDidUpdate(prevProps) {
 
-  //   //if (prevProps.bgColor !== this.props.bgColor) {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.bgColor !== prevState.bgColor) {
 
-  //     axios.get('https://www.breakingbadapi.com/api/quote/random')
-  //     .then(response => {
-  //       let getQuote = response.data[0].quote;
-  //       let getQuoter = response.data[0].author;
-  //       getQuoter = "- " + getQuoter;
+      axios.get('https://www.breakingbadapi.com/api/quote/random')
+      .then(response => {
+        let getQuote = response.data[0].quote;
+        let getQuoter = response.data[0].author;
+        getQuoter = "- " + getQuoter;
 
-  //       console.log(getQuoter);
-  //       this.setState(() => ({pageQuote: getQuote}));
-  //       this.setState(() => ({quoter: getQuoter}));
-  //     })
-  //     .catch(error => {
-  //       console.log(error)
-  //     })
+        console.log(getQuoter);
+        this.setState(() => ({pageQuote: getQuote, quoter: getQuoter}));
+      })
+      .catch(error => {
+        console.log(error)
+      })
 
-  //  // }
-  // }
+     }
+  }
 
   changeBgColor() {
     let colorLength = this.state.colors.length;
